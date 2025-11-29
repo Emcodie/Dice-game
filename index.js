@@ -1,5 +1,12 @@
-var playerOneName = prompt("Enter Player 1 name:");
-var playerTwoName = prompt("Enter Player 2 name:");
+var playerOneName = localStorage.getItem("playerOneName");
+var playerTwoName = localStorage.getItem("playerTwoName");
+if (!playerOneName || !playerTwoName) {
+  var playerOneName = prompt("Enter Player 1 name:");
+  var playerTwoName = prompt("Enter Player 2 name:");
+
+  localStorage.setItem("playerOneName", playerOneName);
+  localStorage.setItem("playerTwoName", playerTwoName);
+}
 document.querySelectorAll("p")[0].innerHTML = playerOneName;
 document.querySelectorAll("p")[1].innerHTML = playerTwoName;
 var randomNumber1 = Math.floor(Math.random() * 6) + 1;
@@ -17,4 +24,9 @@ if (randomNumber1 > randomNumber2) {
   document.querySelector("h1").innerHTML = playerTwoName + " Wins! 🚩";
 } else {
   document.querySelector("h1").innerHTML = "Draw!";
+}
+function resetPlayer() {
+  localStorage.removeItem("playerOneName");
+  localStorage.removeItem("playerTwoName");
+  location.reload();
 }
